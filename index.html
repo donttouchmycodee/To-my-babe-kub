@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruk kub babe</title>
+    <style>
+        /* สไตล์พื้นหลังสีพาสเทล */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffeef8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            color: #d63384;
+            padding: 20px;
+        }
+
+        /* กล่องข้อความ UI */
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.15);
+            text-align: center;
+            z-index: 10;
+            border: 3px solid #ffc1e3;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 { font-size: 26px; margin-bottom: 15px; }
+        p { font-size: 18px; line-height: 1.6; margin-bottom: 20px; }
+
+        /* ส่วนของวิดีโอ YouTube */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* อัตราส่วน 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* เอฟเฟกต์หัวใจลอย */
+        .heart {
+            position: fixed;
+            color: #ff85a1;
+            font-size: 20px;
+            user-select: none;
+            animation: moveHearts 5s linear infinite;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        @keyframes moveHearts {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="heart-container"></div>
+
+    <div class="card">
+        <h1>To P'tf ❤️</h1>
+        
+        <!-- ส่วนของวิดีโอ YouTube -->
+        <div class="video-container">
+            <!-- วิธีเปลี่ยนเพลง: ก๊อปปี้ ID หลังเครื่องหมาย = ในลิงก์ YouTube มาใส่แทนที่ hV0M6A-kLUI -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/8cXrKAkJTXs?si=COSAx8YycPeG8Vab&amp;start=63" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <p>
+            Chop p tonfern makkkk kub eiei<br>
+            
+        </p>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.getElementById('heart-container').appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+
+</body>
+</html>
