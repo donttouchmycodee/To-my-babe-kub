@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap" rel="stylesheet">
+    <title>mai dai jeeb </title>
+    <style>
+        /* --- สไตล์หน้าเว็บหลัก --- */
+        body {
+            margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; background-color: #ffeef8;
+            font-family: "Anuphan", Tahoma, Geneva, Verdana, sans-serif;
+            color: #d63384; padding: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.15); text-align: center;
+            border: 3px solid #ffc1e3; max-width: 500px; width: 100%;
+        }
+        .video-container {
+            position: relative; width: 100%; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 15px; margin-bottom: 20px;
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* --- สไตล์ Popup กิมมิค --- */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(252, 200, 226, 0.9); /* พื้นหลังสีชมพูเข้ม */
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; visibility: hidden; opacity: 0; transition: 0.4s;
+        }
+        .overlay.show { visibility: visible; opacity: 1; }
+
+        .popup-card {
+            background: white; padding: 30px; border-radius: 25px;
+            text-align: center; border: 4px solid #ffc1e3; width: 85%; max-width: 350px;
+        }
+        .btn-group { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
+        
+        .btn {
+            padding: 15px; border-radius: 50px; font-size: 18px;
+            cursor: pointer; border: none; transition: 0.2s; font-weight: bold;
+        }
+        .btn-primary { background-color: #ff85a1; color: white; font-family: "Anuphan";}
+        .btn-secondary { background-color: #f0f0f0; color: #888; font-family: "Anuphan";}
+
+        /* หัวใจลอย */
+        .heart { position: fixed; color: #ff85a1; font-size: 20px; animation: moveHearts 5s linear infinite; opacity: 0; z-index: -1; }
+        @keyframes moveHearts { 0% { transform: translateY(100vh); opacity: 1; } 100% { transform: translateY(-10vh); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <!-- Popup กิมมิค -->
+    <div class="overlay" id="loveOverlay">
+        <div class="popup-card">
+            <h2 id="questionText">พี่รักเรามั้ยคุ้บ</h2>
+            <div class="btn-group" id="btnGroup">
+                <!-- เริ่มต้นด้วยปุ่ม รัก และ ไม่รัก -->
+                <button class="btn btn-primary" onclick="confirmLove()">รัก</button>
+                <button class="btn btn-secondary" onclick="wrongChoice()" id="noBtn">ไม่รัก</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าเว็บหลัก -->
+    <div id="heart-container"></div>
+    <div class="card">
+        <h1>To P'tf❤️</h1>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/8cXrKAkJTXs?si=r_WPP0XYqTk2TX8Z&amp;start=63" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <p>อย่าแอบยิ้ม <br> แต่เราชอบพี่นะ งัม</p>
+    </div>
+
+    <script>
+        const overlay = document.getElementById('loveOverlay');
+        const questionText = document.getElementById('questionText');
+        const btnGroup = document.getElementById('btnGroup');
+
+        // แสดง Popup ตอนโหลด
+        window.onload = () => { overlay.classList.add('show'); };
+
+        // เมื่อกด "ไม่รัก"
+        function wrongChoice() {
+            // เปลี่ยนคำถาม
+            questionText.innerHTML = "กดผิดปะ<br>รักเรามั้ย";
+            
+            // เปลี่ยนปุ่มทั้งหมดให้เป็นปุ่ม "รัก"
+            btnGroup.innerHTML = `
+                <button class="btn btn-primary" onclick="confirmLove()">รัก</button>
+                <button class="btn btn-primary" onclick="confirmLove()">รักที่สุดในโลก</button>
+            `;
+        }
+
+        // เมื่อกด "รัก"
+        function confirmLove() {
+            alert("รักเหมือนกันคับบี๋");
+            overlay.classList.remove('show');
+        }
+
+        // หัวใจลอย
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            document.getElementById('heart-container').appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
